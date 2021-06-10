@@ -1,6 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 
+const admin = require('firebase-admin');
+
+var serviceAccount = require('../supermarket-ticket-firebase-adminsdk-aqxgz-3d3d6ed693.json');
 
 
 class Server{
@@ -12,6 +15,11 @@ class Server{
 
         this.middlewares();
         this.routes();
+
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://supermarket-ticket-default-rtdb.europe-west1.firebasedatabase.app"
+        })
 
     }
 
